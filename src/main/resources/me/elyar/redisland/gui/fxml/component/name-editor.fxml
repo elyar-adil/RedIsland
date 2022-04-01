@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+<fx:root
+        xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1"
+        type="HBox" spacing="10">
+    <padding>
+        <Insets topRightBottomLeft="10"/>
+    </padding>
+    <TextField HBox.hgrow="ALWAYS" fx:id="keyTextField" onAction="#rename"/>
+    <Button fx:id="renameButton" onAction="#rename" text="%redis_rename"/>
+</fx:root>

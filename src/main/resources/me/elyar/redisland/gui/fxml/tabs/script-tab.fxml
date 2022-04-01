@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+<?import org.fxmisc.flowless.VirtualizedScrollPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.SplitPane?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.geometry.Insets?>
+<?import me.elyar.redisland.gui.LuaCodeField?>
+<?import java.net.URL?>
+<?import org.fxmisc.richtext.StyleClassedTextArea?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.Label?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="me.elyar.redisland.gui.controller.tabs.ScriptTabController"
+      prefHeight="400.0" prefWidth="600.0" onKeyReleased="#keyReleased">
+    <HBox alignment="CENTER_RIGHT">
+        <ComboBox fx:id="connectionComboBox" promptText="%redis_script_select_connection_prompt" prefWidth="150">
+            <HBox.margin>
+                <Insets topRightBottomLeft="5"/>
+            </HBox.margin>
+        </ComboBox>
+        <Button onAction="#run">
+            <HBox.margin>
+                <Insets topRightBottomLeft="5"/>
+            </HBox.margin>
+            <graphic>
+                <FontAwesomeIconView glyphName="PLAY"/>
+            </graphic>
+        </Button>
+        <Button onAction="#debug">
+            <HBox.margin>
+                <Insets topRightBottomLeft="5"/>
+            </HBox.margin>
+            <graphic>
+                <FontAwesomeIconView glyphName="BUG"/>
+            </graphic>
+        </Button>
+    </HBox>
+    <SplitPane orientation="VERTICAL" VBox.vgrow="ALWAYS">
+        <items>
+            <VirtualizedScrollPane SplitPane.resizableWithParent="true"
+                                   maxHeight="Infinity">
+                <content>
+                    <LuaCodeField fx:id="codeArea"
+                                  wrapText="true"/>
+                </content>
+            </VirtualizedScrollPane>
+            <VBox SplitPane.resizableWithParent="false">
+                <HBox fx:id="debugBar" visible="false">
+                    <Button onAction="#step" fx:id="debugStepButton" prefWidth="30">
+                        <HBox.margin>
+                            <Insets topRightBottomLeft="5"/>
+                        </HBox.margin>
+                        <graphic>
+                            <FontAwesomeIconView glyphName="STEP_FORWARD" glyphSize="12"/>
+                        </graphic>
+                    </Button>
+                    <Button prefWidth="30" fx:id="debugContinueButton" onAction="#resume">
+                        <HBox.margin>
+                            <Insets topRightBottomLeft="5"/>
+                        </HBox.margin>
+                        <graphic>
+                            <FontAwesomeIconView glyphName="PLAY" glyphSize="12"/>
+                        </graphic>
+                    </Button>
+                    <Button prefWidth="30" fx:id="debugStopButton" onAction="#stop">
+                        <HBox.margin>
+                            <Insets topRightBottomLeft="5"/>
+                        </HBox.margin>
+                        <graphic>
+                            <FontAwesomeIconView glyphName="STOP" glyphSize="12"/>
+                        </graphic>
+                    </Button>
+                </HBox>
+                <SplitPane VBox.vgrow="ALWAYS" fx:id="splitPane">
+                    <StyleClassedTextArea prefWidth="Infinity" editable="false" fx:id="logTextArea"/>
+                    <TableView SplitPane.resizableWithParent="false" fx:id="variableTable">
+                        <placeholder>
+                            <Label text="%redis_table_empty"/>
+                        </placeholder>
+                        <columns>
+                            <TableColumn text="变量名" fx:id="variableNameColumn"/>
+                            <TableColumn text="%redis_value" fx:id="variableValueColumn"/>
+                        </columns>
+                    </TableView>
+                </SplitPane>
+            </VBox>
+        </items>
+    </SplitPane>
+    <stylesheets>
+        <URL value="@../../css/script-tab.css"/>
+    </stylesheets>
+</VBox>

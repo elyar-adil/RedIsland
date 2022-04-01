@@ -1,0 +1,11 @@
+.split-pane {
+    -fx-background-color: white;
+}
+.split-pane:horizontal > .split-pane-divider {
+   -fx-background-color: #efefef;
+   -fx-background-insets: 0 2px;
+}
+.split-pane:vertical > .split-pane-divider {
+   -fx-background-color: #efefef;
+   -fx-background-insets: 2px 0;
+}

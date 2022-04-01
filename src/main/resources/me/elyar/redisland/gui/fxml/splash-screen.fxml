@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11"
+      fx:id="vbox" fx:controller="me.elyar.redisland.gui.controller.SplashScreenValueController"
+      style="-fx-background-color: rgb(16,16,16)">
+    <AnchorPane>
+        <ImageView
+                AnchorPane.bottomAnchor="0"
+                AnchorPane.leftAnchor="0"
+                AnchorPane.rightAnchor="0"
+                AnchorPane.topAnchor="0"
+                fitWidth="500" fitHeight="275" preserveRatio="true">
+            <Image url="@../../../../../images/splash-screen.png"/>
+        </ImageView>
+        <Label AnchorPane.bottomAnchor="10"
+               AnchorPane.leftAnchor="0"
+               AnchorPane.rightAnchor="0"
+               prefWidth="${vbox.width}"
+               alignment="CENTER"
+               style="-fx-text-fill: #323232;" text="%splash_copyright">
+        </Label>
+    </AnchorPane>
+    <ProgressBar fx:id="progressBar" prefWidth="${vbox.width}"/>
+    <stylesheets>
+        <URL value="@../css/progress-bar.css"/>
+    </stylesheets>
+</VBox>

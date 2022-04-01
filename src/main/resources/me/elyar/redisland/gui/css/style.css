@@ -1,0 +1,112 @@
+.list-view-wrapper {
+    -fx-background-color: #ffffff;
+}
+
+.list-view, .split-pane {
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.header {
+    -fx-border-width: 0 0 1px 0;
+    -fx-border-color: transparent transparent #eeeeee transparent;
+    -fx-border-insets: 0 5px 5px 5px;
+}
+
+
+.bottom-search {
+    -fx-border-width: 1px 0 0 0;
+    -fx-border-color: #eeeeee transparent transparent transparent;
+    -fx-border-insets: 0 0 5px 5px;
+}
+
+.bottom-search .text-field {
+    -fx-background-color: transparent;
+    -fx-border-width: 0 0 1px 0;
+    -fx-border-color: transparent transparent #eeeeee transparent;
+    -fx-padding: 5px 0;
+    -fx-border-insets: 0 0 0 10px;
+}
+
+.list-view {
+    -fx-padding: 0 0 0 3px;
+    -fx-background-color: transparent;
+}
+
+.list-view .list-cell:empty, even {
+    -fx-background-color: transparent;
+}
+
+.list-view .list-cell:empty, odd {
+    -fx-background-color: transparent;
+}
+
+.list-view .list-cell:filled {
+    -fx-background-color: transparent;
+    -fx-padding: 12;
+    -fx-text-fill: rgba(0, 0, 0, 0.8);
+    -fx-graphic-text-gap: 12;
+}
+
+.list-view .list-cell:filled:selected {
+    -fx-background-color: #ececec;
+    -fx-background-radius: 4;
+    -fx-background-insets: 2;
+    -fx-text-fill: rgba(0, 0, 0, 1);
+}
+
+.new-connection-button {
+    -fx-background: transparent;
+}
+
+.cell-selected {
+    -fx-font-weight: bold;
+    -fx-background-radius: 4;
+    -fx-background-insets: 2;
+    -fx-text-fill: rgba(100, 0, 0, 1);
+}
+
+.context-menu .menu-item:focused,
+.context-menu .menu-item:hover {
+    -fx-background-color: #efefef;
+}
+
+.context-menu:disabled {
+    -fx-text-fill: #efefef;
+    -fx-background-color: red;
+}
+
+.context-menu .menu-item:focused .label,
+.context-menu .menu-item:hover .label {
+    -fx-text-fill: black;
+}
+
+.menu-bar {
+    -fx-background-color: #efefef;
+    -fx-border-width: 0 0 1px 0;
+    -fx-border-color: #dfdfdf;
+}
+
+.menu:hover,
+.menu:showing {
+    -fx-background-color: #dfdfdf;
+}
+
+.menu:hover .label,
+.menu:showing .label {
+    -fx-text-fill: black;
+}
+
+.menu-bar .menu .accelerator-text {
+    -fx-text-fill: rgba(0, 0, 0, 0.42);
+}
+
+.acc-menu-item {
+    -fx-graphic-text-gap: 0;
+}
+
+.status-bar {
+    -fx-background-color: #efefef;
+    -fx-border-width: 1px 0 0 0;
+    -fx-border-color: #dfdfdf;
+}

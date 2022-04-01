@@ -1,0 +1,87 @@
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+.scroll-pane {
+   -fx-background-color: transparent;
+}
+
+.chart-area-symbol {
+    -fx-background-color: transparent, transparent;
+}
+.chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+.chart-vertical-grid-lines {
+    -fx-stroke: transparent;
+}
+
+.chart-horizontal-grid-lines {
+    -fx-stroke: #efefef;
+}
+
+
+.chart-series-area-line{
+    -fx-stroke-width: 5px;
+    -fx-stroke-line-cap: butt;
+}
+
+.client-chart .chart-series-area-fill {
+    -fx-fill: linear-gradient(to bottom, #aa000055, #aa000033);
+}
+.client-chart .chart-series-area-line {
+    -fx-stroke: #aa0000ff;
+}
+
+.in-chart .chart-series-area-fill {
+    -fx-fill: linear-gradient(to bottom, #0000aa55, #0000aa33);
+}
+.in-chart .chart-series-area-line {
+    -fx-stroke:#0000aaff;
+}
+
+.out-chart .chart-series-area-fill {
+    -fx-fill: linear-gradient(to bottom, #0000aa55, #0000aa33);
+}
+.out-chart .chart-series-area-line {
+    -fx-stroke: #0000aaff;
+}
+
+.used-memory-chart .chart-series-area-fill {
+    -fx-fill: linear-gradient(to bottom, #00aaaa55, #00aaaa33);
+}
+.used-memory-chart .chart-series-area-line {
+    -fx-stroke: #00aaaaff;
+}
+
+
+.opts-per-sec-chart .chart-series-area-fill {
+    -fx-fill: linear-gradient(to bottom, #aa00aa55, #aa00aa33);
+}
+.opts-per-sec-chart .chart-series-area-line {
+    -fx-stroke: #AA00AAff;
+}
+
+.hit-miss-chart .miss-series .chart-series-area-fill {
+    -fx-fill: linear-gradient(to bottom, #aa000055, #aa000033);
+}
+.hit-miss-chart .miss-series .chart-series-area-line {
+    -fx-stroke: #aa0000ff;
+}
+
+.hit-miss-chart .hit-series .chart-series-area-fill {
+    -fx-fill: linear-gradient(to bottom, #00aa0055, #00aa0033);
+}
+.hit-miss-chart .hit-series .chart-series-area-line {
+    -fx-stroke: #00aa00ff;
+}
+
+
+.head-label {
+    -fx-font-size: 1em;
+    -fx-font-weight: bold;
+}
+
+.head-grid {
+    -fx-padding: 15;
+}

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.control.ChoiceBox?>
+<?import org.fxmisc.flowless.VirtualizedScrollPane?>
+<?import me.elyar.redisland.gui.JsonCodeField?>
+<?import javafx.scene.control.Button?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import java.net.URL?>
+<fx:root
+        xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1"
+        type="VBox" spacing="10" minHeight="100" minWidth="200">
+    <HBox spacing="10">
+        <ChoiceBox fx:id="typeChoiceBox" HBox.hgrow="NEVER"
+                   onAction="#modeChange" />
+        <HBox spacing="10" HBox.hgrow="ALWAYS" alignment="CENTER_RIGHT">
+            <Button fx:id="formatButton" text="%redis_json_format">
+                <graphic>
+                    <FontAwesomeIconView glyphName="CODE"/>
+                </graphic>
+            </Button>
+            <Button fx:id="minButton" StackPane.alignment="CENTER_RIGHT" text="%redis_json_min">
+                <graphic>
+                    <FontAwesomeIconView glyphName="COMPRESS"/>
+                </graphic>
+            </Button>
+        </HBox>
+    </HBox>
+    <VirtualizedScrollPane VBox.vgrow="ALWAYS">
+        <content>
+            <JsonCodeField fx:id="valueCodeArea"
+                           wrapText="true">
+                <padding>
+                    <Insets topRightBottomLeft="5"/>
+                </padding>
+            </JsonCodeField>
+        </content>
+    </VirtualizedScrollPane>
+    <stylesheets>
+        <URL value="@../../css/value-editor.css"/>
+        <URL value="@../../css/choice-box.css"/>
+    </stylesheets>
+</fx:root>

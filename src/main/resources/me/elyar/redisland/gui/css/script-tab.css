@@ -1,0 +1,10 @@
+.error-log {
+    -fx-fill: red;
+}
+.debug-log {
+    -fx-fill: grey;
+}
+
+.debug-additional-log {
+    -fx-fill: blue;
+}

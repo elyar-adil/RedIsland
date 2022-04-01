@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/11"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="me.elyar.redisland.gui.controller.tabs.PerformanceTabController">
+    <content>
+        <VBox>
+            <GridPane styleClass="head-grid">
+                <rowConstraints>
+                    <RowConstraints/>
+                </rowConstraints>
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES"/>
+                    <ColumnConstraints hgrow="SOMETIMES"/>
+                    <ColumnConstraints hgrow="SOMETIMES"/>
+                    <ColumnConstraints hgrow="SOMETIMES"/>
+                    <ColumnConstraints hgrow="SOMETIMES"/>
+                    <ColumnConstraints hgrow="SOMETIMES"/>
+                </columnConstraints>
+                <children>
+                    <VBox>
+                        <children>
+                            <Label text="%redis_performance_hit_rate" styleClass="head-label"/>
+                            <Label fx:id="hitRateLabel"/>
+                        </children>
+                    </VBox>
+                    <VBox GridPane.columnIndex="1">
+                        <children>
+                            <Label text="%redis_performance_memory" styleClass="head-label"/>
+                            <Label fx:id="memoryLabel"/>
+                        </children>
+                    </VBox>
+                    <VBox GridPane.columnIndex="2">
+                        <children>
+                            <Label text="%redis_performance_total_key_count" styleClass="head-label"/>
+                            <Label fx:id="totalKeyCountLabel"/>
+                        </children>
+                    </VBox>
+                    <VBox GridPane.columnIndex="3">
+                        <children>
+                            <Label text="%redis_performance_connected_client_count" styleClass="head-label"/>
+                            <Label fx:id="clientCountLabel"/>
+                        </children>
+                    </VBox>
+                    <VBox GridPane.columnIndex="4">
+                        <children>
+                            <Label text="%redis_performance_total_connection_count" styleClass="head-label"/>
+                            <Label fx:id="totalConnectionLabel"/>
+                        </children>
+                    </VBox>
+                    <VBox GridPane.columnIndex="5">
+                        <children>
+                            <Label text="%redis_performance_rejected_connection_count" styleClass="head-label"/>
+                            <Label fx:id="connectionRejectedLabel"/>
+                        </children>
+                    </VBox>
+                    <VBox GridPane.columnIndex="6">
+                        <children>
+                            <Label text="%redis_performance_up_time" styleClass="head-label"/>
+                            <Label fx:id="uptimeLabel"/>
+                        </children>
+                    </VBox>
+                </children>
+            </GridPane>
+            <GridPane>
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES"/>
+                    <ColumnConstraints hgrow="SOMETIMES"/>
+                    <ColumnConstraints hgrow="SOMETIMES"/>
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints vgrow="SOMETIMES"/>
+                    <RowConstraints vgrow="SOMETIMES"/>
+                </rowConstraints>
+                <children>
+                    <AreaChart fx:id="connectedClientChart" animated="false" legendVisible="false"
+                               styleClass="client-chart" title="%redis_performance_chart_client" verticalZeroLineVisible="false">
+                        <xAxis>
+                            <NumberAxis side="BOTTOM"/>
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis prefWidth="30" side="RIGHT"/>
+                        </yAxis>
+                    </AreaChart>
+                    <AreaChart fx:id="networkInputChart" animated="false" legendVisible="false" styleClass="in-chart"
+                               title="%redis_performance_chart_network_input" verticalZeroLineVisible="false" GridPane.columnIndex="2">
+                        <xAxis>
+                            <NumberAxis side="BOTTOM"/>
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis prefWidth="30" side="RIGHT"/>
+                        </yAxis>
+                    </AreaChart>
+                    <AreaChart fx:id="networkOutputChart" animated="false" legendVisible="false" styleClass="out-chart"
+                               title="%redis_performance_chart_network_output" verticalZeroLineVisible="false" GridPane.columnIndex="1">
+                        <xAxis>
+                            <NumberAxis side="BOTTOM"/>
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis prefWidth="30" side="RIGHT"/>
+                        </yAxis>
+                    </AreaChart>
+                    <AreaChart fx:id="usedMemoryChart" animated="false" legendVisible="false"
+                               styleClass="used-memory-chart" title="%redis_performance_chart_memory" verticalZeroLineVisible="false"
+                               GridPane.rowIndex="1">
+                        <xAxis>
+                            <NumberAxis side="BOTTOM"/>
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis prefWidth="30" side="RIGHT"/>
+                        </yAxis>
+                    </AreaChart>
+                    <AreaChart fx:id="optsPerSecChart" animated="false" legendVisible="false"
+                               styleClass="opts-per-sec-chart" title="%redis_performance_chart_opts_per_second" verticalZeroLineVisible="false"
+                               GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <xAxis>
+                            <NumberAxis side="BOTTOM"/>
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis prefWidth="30" side="RIGHT"/>
+                        </yAxis>
+                    </AreaChart>
+
+                    <AreaChart fx:id="hitMissChart" animated="false" legendVisible="false" styleClass="hit-miss-chart"
+                               title="%redis_performance_chart_hit_miss" verticalZeroLineVisible="false" GridPane.columnIndex="2"
+                               GridPane.rowIndex="1">
+                        <xAxis>
+                            <NumberAxis side="BOTTOM"/>
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis prefWidth="30" side="RIGHT"/>
+                        </yAxis>
+                    </AreaChart>
+
+                </children>
+            </GridPane>
+        </VBox>
+    </content>
+    <stylesheets>
+        <URL value="@../../css/chart.css"/>
+    </stylesheets>
+</ScrollPane>

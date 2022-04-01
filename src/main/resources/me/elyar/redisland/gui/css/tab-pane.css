@@ -1,0 +1,64 @@
+.tab-pane {
+    -fx-background-color: white;
+    -fx-open-tab-animation: NONE;
+    -fx-close-tab-animation: NONE;
+}
+.tab {
+    -fx-background-color: #efefef;
+    -fx-padding: 6px 10px 7px 10px;
+    -fx-border-radius: 1px;
+    -fx-border-color: #dfdfdf;
+    -fx-border-width: 1px 1px 0 1px;
+
+}
+.tab-pane>*.tab-header-area>*.tab-header-background
+{
+    -fx-background-color: -fx-outer-border, -fx-text-box-border, white;
+    -fx-background-color: transparent;
+    -fx-border-width: 0 0 1px 0;
+    -fx-border-color: #efefef;
+}
+.tab:selected {
+    -fx-background-color: white;
+    -fx-border-color: #f1f1f1;
+    -fx-border-width: 1px 1px 0 1px;
+}
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+    -fx-border-width: 0;
+}
+
+.tab-label {
+    -fx-padding: 0 10px 0 0;
+    -fx-graphic-text-gap: 10px;
+}
+
+
+.tab-pane > .tab-header-area > .control-buttons-tab > .container > .tab-down-button .context-menu {
+}
+.tab-pane > .tab-header-area > .control-buttons-tab > .container > .tab-down-button .context-menu .label:hover {
+    -fx-background: #efefef;
+    -fx-text-fill: black;
+}
+.tab-pane > .tab-header-area > .control-buttons-tab > .container > .tab-down-button .context-menu .label:selected {
+    -fx-background: #ef5555;
+    -fx-text-fill: black;
+}
+
+.tab-pane .tab-down-button .context-menu .radio-menu-item {
+    -fx-text-fill: black;
+}
+
+.tab-pane .tab-down-button .context-menu .radio-menu-item:hover,
+.tab-pane .tab-down-button .context-menu .radio-menu-item:focused{
+    -fx-background-color:#efefef;
+}
+
+.tab-pane .tab-down-button .context-menu .radio-menu-item:hover .label,
+.tab-pane .tab-down-button .context-menu .radio-menu-item:focused .label{
+    -fx-text-fill: black;
+}
+
+.tab-pane .tab-down-button .context-menu .radio-menu-item:hover .radio ,
+.tab-pane .tab-down-button .context-menu .radio-menu-item:focused .radio  {
+    -fx-background-color: black;
+}

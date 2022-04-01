@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TitledPane?>
+<?import me.elyar.redisland.gui.component.ValueEditorPane?>
+<?import me.elyar.redisland.gui.component.TTLEditorPane?>
+<?import javafx.scene.control.ScrollPane?>
+<?import me.elyar.redisland.gui.component.NameEditorPane?>
+<ScrollPane xmlns="https://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="me.elyar.redisland.gui.controller.valueeditor.RedisStringViewController"
+            fitToWidth="true" fitToHeight="true">
+    <VBox>
+        <TitledPane text="%redis_key">
+            <NameEditorPane HBox.hgrow="ALWAYS" fx:id="nameEditorPane"/>
+        </TitledPane>
+        <TitledPane text="%redis_ttl">
+            <TTLEditorPane fx:id="ttlEditor"/>
+        </TitledPane>
+        <AnchorPane VBox.vgrow="ALWAYS">
+            <TitledPane text="%redis_value" collapsible="false"
+                        AnchorPane.bottomAnchor="0"
+                        AnchorPane.leftAnchor="0"
+                        AnchorPane.rightAnchor="0"
+                        AnchorPane.topAnchor="0">
+                <VBox spacing="10">
+                    <ValueEditorPane VBox.vgrow="ALWAYS" fx:id="valueEdit"/>
+                    <VBox alignment="CENTER_RIGHT">
+                        <Button fx:id="saveButton" onAction="#saveValue" text="%redis_save"/>
+                    </VBox>
+                </VBox>
+            </TitledPane>
+        </AnchorPane>
+    </VBox>
+</ScrollPane>

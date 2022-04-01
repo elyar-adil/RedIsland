@@ -1,0 +1,12 @@
+.text-field {
+    -fx-background-color: white;
+    -fx-background-insets: 0;
+    -fx-border-color: #efefef;
+    -fx-accent: red;
+}
+
+.text-field:focused {
+    -fx-background-color: white;
+    -fx-background-insets: 0;
+    -fx-border-color: #aaa;
+}

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.cell.MapValueFactory?>
+<?import javafx.scene.control.cell.TextFieldTableCell?>
+
+<?import me.elyar.redisland.gui.AdaptiveSplitPane?>
+<?import me.elyar.redisland.gui.component.ValueEditorPane?>
+<?import me.elyar.redisland.gui.component.TTLEditorPane?>
+<?import me.elyar.redisland.gui.component.NameEditorPane?>
+<ScrollPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="me.elyar.redisland.gui.controller.valueeditor.RedisHashViewController"
+            fitToWidth="true" fitToHeight="true">
+    <VBox>
+        <TitledPane text="%redis_key">
+            <NameEditorPane HBox.hgrow="ALWAYS" fx:id="nameEditorPane"/>
+        </TitledPane>
+        <TitledPane text="%redis_ttl">
+            <TTLEditorPane fx:id="ttlEditor"/>
+        </TitledPane>
+        <AdaptiveSplitPane VBox.vgrow="ALWAYS" fx:id="splitPane">
+            <AnchorPane>
+                <TitledPane text="%redis_data" collapsible="false"
+                            AnchorPane.bottomAnchor="0"
+                            AnchorPane.leftAnchor="0"
+                            AnchorPane.rightAnchor="0"
+                            AnchorPane.topAnchor="0">
+                    <VBox alignment="CENTER_RIGHT" spacing="10">
+                        <TableView fx:id="valueTableView" VBox.vgrow="ALWAYS" minHeight="100">
+                            <placeholder>
+                                <Label text="%redis_table_empty"/>
+                            </placeholder>
+                            <columns>
+                                <TableColumn fx:id="keyColumn" text="%redis_field" reorderable="false">
+                                    <cellValueFactory>
+                                        <MapValueFactory key="key"/>
+                                    </cellValueFactory>
+                                    <cellFactory>
+                                        <TextFieldTableCell fx:factory="forTableColumn"/>
+                                    </cellFactory>
+                                </TableColumn>
+                                <TableColumn fx:id="valueColumn" text="%redis_value" reorderable="false" prefWidth="200">
+                                    <cellValueFactory>
+                                        <MapValueFactory key="value"/>
+                                    </cellValueFactory>
+                                </TableColumn>
+                            </columns>
+                            <contextMenu>
+                                <ContextMenu>
+                                    <items>
+                                        <MenuItem text="%redis_add" onAction="#addKey"/>
+                                        <MenuItem text="%redis_remove" fx:id="removeMenuItem" onAction="#remove"/>
+                                    </items>
+                                </ContextMenu>
+                            </contextMenu>
+                        </TableView>
+                        <Button onAction="#addKey"  text="%redis_add"/>
+                    </VBox>
+                </TitledPane>
+            </AnchorPane>
+            <AnchorPane>
+                <TitledPane collapsible="false" text="%redis_edit"
+                            AnchorPane.bottomAnchor="0"
+                            AnchorPane.leftAnchor="0"
+                            AnchorPane.rightAnchor="0"
+                            AnchorPane.topAnchor="0">
+                    <VBox VBox.vgrow="ALWAYS" spacing="10">
+                        <Label text="%redis_field"/>
+                        <TextField fx:id="editFieldTextField"/>
+                        <Label text="%redis_value"/>
+                        <ValueEditorPane VBox.vgrow="ALWAYS" fx:id="valueEdit"/>
+                        <HBox alignment="CENTER_RIGHT" spacing="10">
+                            <Button mnemonicParsing="false" text="CANCEL" onAction="#cancel"/>
+                            <Button mnemonicParsing="false" text="SAVE" onAction="#saveValue" fx:id="saveButton"/>
+                        </HBox>
+                    </VBox>
+                </TitledPane>
+            </AnchorPane>
+        </AdaptiveSplitPane>
+    </VBox>
+</ScrollPane>

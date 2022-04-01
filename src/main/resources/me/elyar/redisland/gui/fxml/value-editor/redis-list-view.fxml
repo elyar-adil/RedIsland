@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<?import me.elyar.redisland.gui.AdaptiveSplitPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.cell.MapValueFactory?>
+<?import javafx.scene.control.cell.TextFieldTableCell?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import me.elyar.redisland.gui.component.TTLEditorPane?>
+<?import me.elyar.redisland.gui.component.ValueEditorPane?>
+<?import javafx.scene.control.ScrollPane?>
+<?import me.elyar.redisland.gui.component.NameEditorPane?>
+<?import javafx.scene.control.Label?>
+<ScrollPane
+        xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="me.elyar.redisland.gui.controller.valueeditor.RedisListViewController"
+        fitToWidth="true" fitToHeight="true">
+    <VBox>
+        <TitledPane text="%redis_key">
+            <NameEditorPane HBox.hgrow="ALWAYS" fx:id="nameEditorPane"/>
+        </TitledPane>
+        <TitledPane text="%redis_ttl">
+            <TTLEditorPane fx:id="ttlEditor"/>
+        </TitledPane>
+        <AdaptiveSplitPane fx:id="splitPane" dividerPositions="0.5" prefHeight="100.0" prefWidth="200.0"
+                           VBox.vgrow="ALWAYS">
+            <AnchorPane>
+                <TitledPane text="%redis_data" collapsible="false"
+                            AnchorPane.bottomAnchor="0"
+                            AnchorPane.leftAnchor="0"
+                            AnchorPane.rightAnchor="0"
+                            AnchorPane.topAnchor="0">
+                    <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS" spacing="10">
+                        <TableView fx:id="valueTableView" VBox.vgrow="ALWAYS" minHeight="100">
+                            <placeholder>
+                                <Label text="%redis_table_empty"/>
+                            </placeholder>
+                            <columns>
+                                <TableColumn fx:id="indexColumn" text="%redis_index" reorderable="false">
+                                    <cellValueFactory>
+                                        <MapValueFactory key="index"/>
+                                    </cellValueFactory>
+                                    <cellFactory>
+                                        <TextFieldTableCell fx:factory="forTableColumn"/>
+                                    </cellFactory>
+                                </TableColumn>
+                                <TableColumn fx:id="valueColumn" text="%redis_value" reorderable="false" prefWidth="200">
+                                    <cellValueFactory>
+                                        <MapValueFactory key="value"/>
+                                    </cellValueFactory>
+                                </TableColumn>
+                            </columns>
+                            <contextMenu>
+                                <ContextMenu>
+                                    <items>
+                                        <MenuItem onAction="#newValueTop" text="%redis_add_to_head"/>
+                                        <MenuItem onAction="#newValue" text="%redis_add_to_tail"/>
+                                        <MenuItem fx:id="removeMenuItem" disable="true" onAction="#remove" text="%redis_remove"/>
+                                    </items>
+                                </ContextMenu>
+                            </contextMenu>
+                        </TableView>
+                        <HBox alignment="CENTER_RIGHT" spacing="10">
+                            <Button mnemonicParsing="false" text="%redis_add_to_head" onAction="#newValueTop"/>
+                            <Button mnemonicParsing="false" text="%redis_add_to_tail" onAction="#newValue"/>
+                        </HBox>
+                    </VBox>
+                </TitledPane>
+            </AnchorPane>
+            <AnchorPane>
+                <TitledPane text="%redis_edit" collapsible="false"
+                            AnchorPane.bottomAnchor="0"
+                            AnchorPane.leftAnchor="0"
+                            AnchorPane.rightAnchor="0"
+                            AnchorPane.topAnchor="0">
+                    <VBox prefHeight="200.0" prefWidth="100.0" spacing="10">
+                        <ValueEditorPane VBox.vgrow="ALWAYS" fx:id="valueEdit"/>
+                        <HBox alignment="CENTER_RIGHT" spacing="10">
+                            <Button mnemonicParsing="false" text="%redis_cancel" onAction="#cancel"/>
+                            <Button mnemonicParsing="false" text="%redis_save" onAction="#saveValue"/>
+                        </HBox>
+                    </VBox>
+                </TitledPane>
+            </AnchorPane>
+        </AdaptiveSplitPane>
+    </VBox>
+</ScrollPane>

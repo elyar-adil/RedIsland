@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.MenuBar?>
+<?import org.controlsfx.control.StatusBar?>
+<?import javafx.scene.input.KeyCodeCombination?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import me.elyar.redisland.gui.AccMenuItem?>
+<?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.ToggleGroup?>
+<VBox fx:controller="me.elyar.redisland.gui.controller.PrimaryController"
+      xmlns:fx="http://javafx.com/fxml/1">
+    <MenuBar useSystemMenuBar="true">
+        <Menu text="%main_menu_script">
+            <MenuItem text="%main_menu_script_new" onAction="#newScript">
+                <graphic>
+                    <FontAwesomeIconView glyphName="FILE"/>
+                </graphic>
+                <accelerator>
+                    <KeyCodeCombination alt="UP" code="N" control="UP" meta="UP" shift="UP" shortcut="DOWN"/>
+                </accelerator>
+            </MenuItem>
+            <MenuItem text="%main_menu_script_open" onAction="#openScript">
+                <graphic>
+                    <FontAwesomeIconView glyphName="FOLDER_OPEN"/>
+                </graphic>
+                <accelerator>
+                    <KeyCodeCombination alt="UP" code="O" control="UP" meta="UP" shift="UP" shortcut="DOWN"/>
+                </accelerator>
+            </MenuItem>
+            <MenuItem text="%main_menu_script_save" fx:id="saveMenuItem" onAction="#saveScript">
+                <graphic>
+                    <FontAwesomeIconView glyphName="SAVE"/>
+                </graphic>
+                <accelerator>
+                    <KeyCodeCombination alt="UP" code="S" control="UP" meta="UP" shift="UP" shortcut="DOWN"/>
+                </accelerator>
+            </MenuItem>
+            <MenuItem text="%main_menu_script_save_as" fx:id="saveAsMenuItem" onAction="#saveAsScript">
+                <accelerator>
+                    <KeyCodeCombination alt="UP" code="S" control="UP" meta="UP" shift="DOWN" shortcut="DOWN"/>
+                </accelerator>
+            </MenuItem>
+            <MenuItem text="%main_menu_script_close" fx:id="closeScriptMenuItem" onAction="#closeScript">
+            </MenuItem>
+        </Menu>
+        <Menu text="%main_menu_edit">
+            <AccMenuItem description="%main_menu_edit_cut" onAction="#menuAction">
+                <icon>
+                    <FontAwesomeIconView glyphName="CUT"/>
+                </icon>
+                <acceleratorDecoration>
+                    <KeyCodeCombination alt="UP" code="X" control="UP" meta="UP" shift="UP" shortcut="DOWN"/>
+                </acceleratorDecoration>
+            </AccMenuItem>
+            <AccMenuItem description="%main_menu_edit_copy" onAction="#menuAction">
+                <icon>
+                    <FontAwesomeIconView glyphName="COPY"/>
+                </icon>
+                <acceleratorDecoration>
+                    <KeyCodeCombination alt="UP" code="C" control="UP" meta="UP" shift="UP" shortcut="DOWN"/>
+                </acceleratorDecoration>
+            </AccMenuItem>
+            <AccMenuItem description="%main_menu_edit_paste" onAction="#menuAction">
+                <icon>
+                    <FontAwesomeIconView glyphName="PASTE"/>
+                </icon>
+                <acceleratorDecoration>
+                    <KeyCodeCombination alt="UP" code="V" control="UP" meta="UP" shift="UP" shortcut="DOWN"/>
+                </acceleratorDecoration>
+            </AccMenuItem>
+            <AccMenuItem description="%main_menu_edit_delete" onAction="#menuAction">
+                <icon>
+                    <FontAwesomeIconView glyphName="TRASH"/>
+                </icon>
+                <acceleratorDecoration>
+                    <KeyCodeCombination alt="UP" code="DELETE" control="UP" meta="UP" shift="UP" shortcut="UP"/>
+                </acceleratorDecoration>
+            </AccMenuItem>
+            <SeparatorMenuItem/>
+            <AccMenuItem description="%main_menu_edit_find" onAction="#menuAction">
+                <icon>
+                    <FontAwesomeIconView glyphName="SEARCH"/>
+                </icon>
+                <acceleratorDecoration>
+                    <KeyCodeCombination alt="UP" code="F" control="UP" meta="UP" shift="UP" shortcut="DOWN"/>
+                </acceleratorDecoration>
+            </AccMenuItem>
+            <SeparatorMenuItem/>
+            <AccMenuItem description="%main_menu_edit_refresh" onAction="#menuAction">
+                <icon>
+                    <FontAwesomeIconView glyphName="REFRESH"/>
+                </icon>
+                <acceleratorDecoration>
+                    <KeyCodeCombination alt="UP" code="F5" control="UP" meta="UP" shift="UP" shortcut="UP"/>
+                </acceleratorDecoration>
+            </AccMenuItem>
+        </Menu>
+        <Menu text="%main_menu_preference">
+<!--            <Menu text="%main_menu_pref_theme">-->
+<!--                <fx:define>-->
+<!--                    <ToggleGroup fx:id="themeToggleGroup"/>-->
+<!--                </fx:define>-->
+<!--                <graphic>-->
+<!--                    <FontAwesomeIconView glyphName="COFFEE"/>-->
+<!--                </graphic>-->
+<!--                <RadioMenuItem text="%main_menu_pref_theme_light" toggleGroup="$themeToggleGroup">-->
+<!--                </RadioMenuItem>-->
+<!--                <RadioMenuItem text="%main_menu_pref_theme_dark" toggleGroup="$themeToggleGroup">-->
+<!--                </RadioMenuItem>-->
+<!--                <RadioMenuItem text="%main_menu_pref_theme_system" toggleGroup="$themeToggleGroup">-->
+<!--                </RadioMenuItem>-->
+<!--            </Menu>-->
+            <Menu text="%main_menu_pref_language">
+                <fx:define>
+                    <ToggleGroup fx:id="languageToggleGroup"/>
+                </fx:define>
+                <graphic>
+                    <FontAwesomeIconView glyphName="LANGUAGE"/>
+                </graphic>
+                <RadioMenuItem fx:id="englishRadioMenuItem" text="%main_menu_pref_language_english" toggleGroup="$languageToggleGroup" onAction="#languageChange">
+                </RadioMenuItem>
+                <RadioMenuItem fx:id="chineseRadioMenuItem" text="%main_menu_pref_language_chinese" toggleGroup="$languageToggleGroup" onAction="#languageChange">
+                </RadioMenuItem>
+            </Menu>
+        </Menu>
+        <Menu text="%main_menu_help">
+            <MenuItem text="%main_menu_help_about" onAction="#about">
+                <graphic>
+                    <FontAwesomeIconView glyphName="INFO"/>
+                </graphic>
+                <accelerator>
+                    <KeyCodeCombination alt="UP" code="F1" control="UP" meta="UP" shift="UP" shortcut="UP"/>
+                </accelerator>
+            </MenuItem>
+            <MenuItem text="%main_menu_help_feedback" onAction="#feedback">
+                <graphic>
+                    <FontAwesomeIconView glyphName="SEND"/>
+                </graphic>
+            </MenuItem>
+        </Menu>
+    </MenuBar>
+    <SplitPane dividerPositions="0.3,0.3"
+               xmlns="http://javafx.com/javafx/11" VBox.vgrow="ALWAYS">
+        <VBox minWidth="150" styleClass="list-view-wrapper"
+              SplitPane.resizableWithParent="false">
+            <HBox alignment="CENTER_LEFT" styleClass="header">
+                <padding>
+                    <Insets top="10" bottom="10" left="10" right="5"/>
+                </padding>
+                <FontAwesomeIconView
+                        glyphName="SERVER"/>
+                <Label text="%main_connection_list_description" textFill="#000000cd" HBox.hgrow="ALWAYS"
+                       maxWidth="Infinity">
+                    <font>
+                        <Font name="System Bold"/>
+                    </font>
+                    <padding>
+                        <Insets left="10" top="5" bottom="5"/>
+                    </padding>
+                </Label>
+                <Button onAction="#newConnection" styleClass="new-connection-button">
+                    <graphic>
+                        <FontAwesomeIconView glyphName="PLUS"/>
+                    </graphic>
+                </Button>
+            </HBox>
+            <ListView VBox.vgrow="ALWAYS" fx:id="connectionListView" fixedCellSize="0.0" layoutY="34.0"
+                      AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                      AnchorPane.topAnchor="40.0" onKeyReleased="#onListViewKeyReleased"/>
+
+        </VBox>
+        <VBox minHeight="0.0" minWidth="120.0" styleClass="list-view-wrapper"
+              SplitPane.resizableWithParent="false">
+            <HBox alignment="CENTER_LEFT" styleClass="header">
+                <padding>
+                    <Insets top="10" bottom="10" left="10" right="5"/>
+                </padding>
+                <FontAwesomeIconView
+                        glyphName="DATABASE"/>
+                <Label text="%main_database_list_description" textFill="#000000cd" HBox.hgrow="ALWAYS"
+                       maxWidth="Infinity">
+                    <font>
+                        <Font name="System Bold"/>
+                    </font>
+                    <padding>
+                        <Insets left="10" top="5" bottom="5"/>
+                    </padding>
+                </Label>
+            </HBox>
+            <ListView fx:id="databaseListView" VBox.vgrow="ALWAYS"
+                      onKeyReleased="#dbListKeyReleased"/>
+        </VBox>
+
+        <TabPane tabClosingPolicy="ALL_TABS" tabDragPolicy="REORDER"
+                 fx:id="tabPane">
+        </TabPane>
+
+    </SplitPane>
+    <StatusBar text="" fx:id="statusBar">
+        <leftItems>
+            <HBox alignment="CENTER_LEFT">
+                <padding>
+                    <Insets right="5" left="5"/>
+                </padding>
+                <FontAwesomeIconView fx:id="statusBarIconView" visible="false"/>
+            </HBox>
+        </leftItems>
+    </StatusBar>
+    <stylesheets>
+        <URL value="@../css/style.css"/>
+        <URL value="@../css/button.css"/>
+        <URL value="@../css/scroll-bar.css"/>
+        <URL value="@../css/split-pane.css"/>
+        <URL value="@../css/tab-pane.css"/>
+        <URL value="@../css/combo-box.css"/>
+        <URL value="@../css/titled-pane.css"/>
+        <URL value="@../css/table-view.css"/>
+        <URL value="@../css/text-field.css"/>
+    </stylesheets>
+</VBox>

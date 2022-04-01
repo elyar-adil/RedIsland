@@ -1,0 +1,26 @@
+.tree-view {
+    -fx-background-color: white;
+}
+
+.tree-cell:selected,
+.tree-cell:focused {
+    -fx-background-color: #efefef;
+    -fx-text-fill: black;
+}
+
+.tree-view .label {
+    -fx-text-fill: black;
+}
+
+.tree-cell:selected > .tree-disclosure-node > .arrow,
+.tree-cell:focused > .tree-disclosure-node > .arrow {
+    -fx-background-color: black;
+}
+
+.tree-view .type-label {
+    -fx-text-fill: #b3b3b3;
+}
+
+.scroll-pane  {
+    -fx-background-color:transparent;
+}
