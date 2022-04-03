@@ -1,4 +1,4 @@
-![](logo_banner.png)
+![](logo.png)
 
 An open-source Redis GUI management tool, with a Lua script edtior.
 
