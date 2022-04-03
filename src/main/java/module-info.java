@@ -4,7 +4,7 @@ module me.elyar {
     requires transitive javafx.controls;
     requires org.yaml.snakeyaml;
     requires java.desktop;
-    requires de.jensd.fx.fontawesomefx.fontawesome;
+    requires de.jensd.fx.glyphs.fontawesome;
     requires org.fxmisc.richtext;
 
     requires reactfx;
