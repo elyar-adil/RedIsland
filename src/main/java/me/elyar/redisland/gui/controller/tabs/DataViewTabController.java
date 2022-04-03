@@ -96,7 +96,7 @@ public class DataViewTabController {
                 MenuItem deleteMenuItem = new MenuItem(Language.getString("redis_remove"));
                 deleteMenuItem.setOnAction(event -> deleteTreeItemWithConfirmation(keyTreeView.getSelectionModel().getSelectedItems()));
                 if (!treeItem.isLeaf()) {
-                    MenuItem openItem = new MenuItem(treeItem.isExpanded() ? Language.getString("redis_collapse") :  Language.getString("redis_expand"));
+                    MenuItem openItem = new MenuItem(treeItem.isExpanded() ? Language.getString("redis_collapse") : Language.getString("redis_expand"));
                     openItem.setOnAction(event -> treeItem.setExpanded(!treeItem.isExpanded()));
                     contextMenu.getItems().add(openItem);
                 }
@@ -163,12 +163,23 @@ public class DataViewTabController {
                 prevItem = null;
                 currentController.restore();
             } else if (alert.getResult() == MyButtonType.save) {
+                boolean save_successfully = false;
                 try {
-                    currentController.save();
+                    save_successfully = currentController.save();
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                prevItem = null;
+                if (save_successfully) {
+                    prevItem = null;
+                } else {
+                    if (prevItem != null) {
+                        openDataWhenSelectionChanged = false;
+                        keyTreeView.getSelectionModel().clearSelection();
+                        keyTreeView.getSelectionModel().select(prevItem);
+                        openDataWhenSelectionChanged = true;
+                    }
+                }
                 return;
             } else {
                 if (prevItem != null) {

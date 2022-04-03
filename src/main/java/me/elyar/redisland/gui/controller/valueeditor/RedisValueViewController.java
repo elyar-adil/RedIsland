@@ -1,7 +1,5 @@
 package me.elyar.redisland.gui.controller.valueeditor;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.StringProperty;
 import javafx.stage.Stage;
 import me.elyar.redisland.redis.RedisConnection;
@@ -17,5 +15,5 @@ public interface RedisValueViewController {
     void initNew(RedisConnection connection, int dbIndex, StringProperty key, Stage stage, DataViewTabController dataViewTabController);
     void restore();
 
-    void save() throws IOException;
+    boolean save() throws IOException;
 }

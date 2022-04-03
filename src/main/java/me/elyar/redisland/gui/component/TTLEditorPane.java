@@ -78,7 +78,7 @@ public class TTLEditorPane extends VBox {
     }
 
 
-    public void setTtl() {
+    public boolean setTtl() {
         try {
             if (persistCheckBox.isSelected()) {
                 client.persist(key.getValue());
@@ -88,10 +88,12 @@ public class TTLEditorPane extends VBox {
             }
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
         this.ttl = Long.valueOf(ttlTextField.getText());
         saved = true;
         savedProperty.set(true);
+        return true;
     }
 
     public void persistChecked() throws IOException {

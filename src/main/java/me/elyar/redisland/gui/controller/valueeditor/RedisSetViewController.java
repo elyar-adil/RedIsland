@@ -167,15 +167,15 @@ public class RedisSetViewController implements RedisValueViewController {
     }
 
 
-    public void saveValue() throws IOException {
+    public boolean saveValue() throws IOException {
         String key = nameEditorPane.getCurrentKey();
         String newValue = valueEdit.getText();
-        if(StringUtils.isEmpty(key)) {
+        if (StringUtils.isEmpty(key)) {
             Alert alert = new ProperAlert(Alert.AlertType.ERROR);
             alert.getButtonTypes().setAll(MyButtonType.OK);
             alert.setHeaderText(Language.getString("redis_alert_key_empty"));
             alert.showAndWait();
-            return;
+            return false;
         }
         Map<String, String> selectedItem = valueListView.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
@@ -197,17 +197,37 @@ public class RedisSetViewController implements RedisValueViewController {
         }
         isNew = false;
         valueEdit.save();
+        return true;
     }
 
     @Override
-    public void save() throws IOException {
-        saveValue();
-        ttlEditor.setTtl();
-        nameEditorPane.rename();
+    public boolean save() throws IOException {
+        if (valueList.isEmpty()) {
+            Alert alert = new ProperAlert(Alert.AlertType.ERROR);
+            alert.getButtonTypes().setAll(MyButtonType.OK);
+            alert.setHeaderText(Language.getString("redis_save_empty_set_error"));
+            alert.showAndWait();
+            return false;
+        }
+        if (!saveValue()) {
+            return false;
+        }
+        if (!nameEditorPane.isSaved()) {
+            if (!nameEditorPane.rename()) {
+                return false;
+            }
+        }
+        if (!ttlEditor.isSaved()) {
+            return ttlEditor.setTtl();
+        }
+        return true;
     }
 
     @Override
     public boolean isSaved() {
+        if (valueList.isEmpty()) {
+            return false;
+        }
         return nameEditorPane.isSavedBinding().get() && valueEdit.isSavedBinding().get() && ttlEditor.isSavedBinding().get();
     }
 }

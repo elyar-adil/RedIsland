@@ -58,7 +58,10 @@ public class ValueEditorPane extends VBox {
     }
 
     public void setText(String text) {
-        if (text != null && isJson(text)) {
+        if(text == null) {
+            text = "";
+        }
+        if (isJson(text)) {
             typeChoiceBox.setValue("JSON");
         }
         modeChange();
@@ -84,7 +87,7 @@ public class ValueEditorPane extends VBox {
     }
 
     public ObservableBooleanValue isSavedBinding() {
-        return value.isNull().or(value.isEqualTo(editorValue));
+        return editorValue.isEqualTo(value);
     }
 
     public void save() {

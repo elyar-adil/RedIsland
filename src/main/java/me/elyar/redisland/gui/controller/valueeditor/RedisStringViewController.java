@@ -71,10 +71,12 @@ public class RedisStringViewController implements RedisValueViewController {
         init(connection, dbIndex, key, dataViewTabController);
     }
 
+    private boolean is_new = false;
 
     @Override
     public void initNew(RedisConnection connection, int dbIndex, StringProperty key, Stage stage, DataViewTabController dataViewTabController) {
         init(connection, dbIndex, key, dataViewTabController);
+        is_new = true;
     }
 
     @Override
@@ -84,48 +86,64 @@ public class RedisStringViewController implements RedisValueViewController {
         valueEdit.restore();
     }
 
-    public void saveValue() {
+    public boolean saveValue() {
         try {
             RedisClient client = connection.getClient();
             client.select(dbIndex);
 
             String key = nameEditorPane.getCurrentKey();
 
-            if(StringUtils.isEmpty(key)) {
+            if (StringUtils.isEmpty(key)) {
                 Alert alert = new ProperAlert(Alert.AlertType.ERROR);
                 alert.getButtonTypes().setAll(MyButtonType.OK);
                 alert.setHeaderText(Language.getString("redis_alert_key_empty"));
                 alert.showAndWait();
-                return;
+                return false;
             }
 
             if (StringUtils.isEmpty(key)) {
                 Alert alert = new ProperAlert(Alert.AlertType.ERROR);
                 alert.getButtonTypes().setAll(MyButtonType.OK);
                 alert.show();
-                return;
+                return false;
             }
             String value = valueEdit.getText();
 
             client.set(key, value);
+            if (is_new) {
+                dataViewTabController.refreshThenSelect(key);
+            }
             initialValue = value;
             edit = true;
+            is_new = false;
         } catch (IOException | RespException e) {
             e.printStackTrace();
+            return false;
         }
         valueEdit.save();
+        return true;
     }
 
     @Override
-    public void save() throws IOException {
-        saveValue();
-        ttlEditor.setTtl();
-        nameEditorPane.rename();
+    public boolean save() throws IOException {
+        if (!saveValue()) {
+            return false;
+        }
+        if (!nameEditorPane.isSaved()) {
+            if (!nameEditorPane.rename()) {
+                return false;
+            }
+        }
+        if (!ttlEditor.isSaved()) {
+            return ttlEditor.setTtl();
+        }
+        return true;
     }
 
     @Override
     public boolean isSaved() {
-        return nameEditorPane.isSavedBinding().get() && valueEdit.isSavedBinding().get() && ttlEditor.isSavedBinding().get();
+        System.out.println(is_new);
+        return !is_new && (nameEditorPane.isSavedBinding().get() && valueEdit.isSavedBinding().get() && ttlEditor.isSavedBinding().get());
     }
 }
 

@@ -1,6 +1,5 @@
 package me.elyar.redisland.gui.component;
 
-import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -8,10 +7,14 @@ import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableBooleanValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import me.elyar.redisland.StringUtils;
 import me.elyar.redisland.client.RedisClient;
+import me.elyar.redisland.gui.ProperAlert;
+import me.elyar.redisland.gui.buttontype.MyButtonType;
 import me.elyar.redisland.gui.controller.tabs.DataViewTabController;
 import me.elyar.redisland.gui.util.GuiUtils;
 import me.elyar.redisland.util.Language;
@@ -51,14 +54,23 @@ public class NameEditorPane extends HBox {
         this.dataViewTabController = dataViewTabController;
     }
 
-    public void rename() throws IOException {
+    public boolean rename() throws IOException {
         String newKey = keyTextField.getText();
+        if (StringUtils.isEmpty(newKey) || StringUtils.isEmpty((currentKey.getValue()))) {
+            Alert alert = new ProperAlert(Alert.AlertType.ERROR);
+            alert.getButtonTypes().setAll(MyButtonType.OK);
+            alert.setHeaderText(Language.getString("redis_alert_key_empty"));
+            alert.showAndWait();
+            return false;
+        }
+
         if (!isSaved()) {
             client.rename(currentKey.getValue(), newKey);
         }
         currentKey.setValue(newKey);
         keyChanged.set(false);
         dataViewTabController.refreshThenSelect(newKey);
+        return true;
     }
 
 
@@ -72,6 +84,10 @@ public class NameEditorPane extends HBox {
         } else {
             return currentKey.getValue();
         }
+    }
+
+    public String initialKey() {
+        return currentKey.getValue();
     }
 
     public boolean isSaved() {

@@ -88,10 +88,26 @@ public class RedisHashViewController implements RedisValueViewController {
     }
 
     @Override
-    public void save() throws IOException {
-        saveValue();
-        ttlEditor.setTtl();
-        nameEditorPane.rename();
+    public boolean save() throws IOException {
+        if (dataList.isEmpty()) {
+            Alert alert = new ProperAlert(Alert.AlertType.ERROR);
+            alert.getButtonTypes().setAll(MyButtonType.OK);
+            alert.setHeaderText(Language.getString("redis_save_empty_hash_error"));
+            alert.showAndWait();
+            return false;
+        }
+        if (!saveValue()) {
+            return false;
+        }
+        if (!nameEditorPane.isSaved()) {
+            if (!nameEditorPane.rename()) {
+                return false;
+            }
+        }
+        if (!ttlEditor.isSaved()) {
+            return ttlEditor.setTtl();
+        }
+        return true;
     }
 
     private void retrieveData() {
@@ -123,7 +139,7 @@ public class RedisHashViewController implements RedisValueViewController {
         valueTableView.getSelectionModel().clearSelection();
     }
 
-    public void saveValue() throws IOException {
+    public boolean saveValue() throws IOException {
         Map<String, String> selectedItem = valueTableView.getSelectionModel().getSelectedItem();
         String key = nameEditorPane.getCurrentKey();
         if (StringUtils.isEmpty(key)) {
@@ -131,7 +147,7 @@ public class RedisHashViewController implements RedisValueViewController {
             alert.getButtonTypes().setAll(MyButtonType.OK);
             alert.setHeaderText(Language.getString("redis_alert_key_empty"));
             alert.showAndWait();
-            return;
+            return false;
         }
         if (selectedItem != null) {
             client.hdel(key, selectedItem.get("key"));
@@ -145,7 +161,9 @@ public class RedisHashViewController implements RedisValueViewController {
             dataViewTabController.refreshThenSelect(key);
         }
         isNew = false;
+        return true;
     }
+
 
     public void remove() {
         ObservableList<Map<String, String>> selectedItems = valueTableView.getSelectionModel().getSelectedItems();
@@ -174,6 +192,9 @@ public class RedisHashViewController implements RedisValueViewController {
 
     @Override
     public boolean isSaved() {
+        if (dataList.isEmpty()) {
+            return false;
+        }
         return nameEditorPane.isSavedBinding().get() && valueEdit.isSavedBinding().get() && ttlEditor.isSavedBinding().get();
     }
 }
